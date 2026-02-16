@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-# -------------------- DATA LOADING --------------------
+
 def load_data(ticker, start, end):
     data = yf.download(ticker, start=start, end=end)
     data.dropna(inplace=True)
@@ -12,7 +12,6 @@ def load_data(ticker, start, end):
     return data
 
 
-# -------------------- INDICATORS --------------------
 def add_indicators(data, short_window=20, long_window=50):
     data["Returns"] = data["Close"].pct_change()
     data["MA_short"] = data["Close"].rolling(short_window).mean()
@@ -21,7 +20,7 @@ def add_indicators(data, short_window=20, long_window=50):
     return data
 
 
-# -------------------- SIGNAL GENERATION --------------------
+
 def generate_signals(data):
     data["Signal"] = 0
     data.loc[data["MA_short"] > data["MA_long"], "Signal"] = 1
@@ -29,7 +28,7 @@ def generate_signals(data):
     return data
 
 
-# -------------------- BACKTEST --------------------
+
 def backtest_strategy(data, cost=0.005):
     data["Strategy Returns"] = data["Signal"].shift(1) * data["Returns"]
 
@@ -42,7 +41,6 @@ def backtest_strategy(data, cost=0.005):
     return data
 
 
-# -------------------- PERFORMANCE METRICS --------------------
 def performance_metrics(data):
     std = data["Strategy Returns"].std()
 
@@ -69,7 +67,7 @@ def performance_metrics(data):
     return metrics
 
 
-# -------------------- OPTIMIZATION --------------------
+
 def optimize_strategy(data):
     results = []
 
@@ -94,7 +92,7 @@ def optimize_strategy(data):
     return results_df.sort_values(by="Sharpe", ascending=False)
 
 
-# -------------------- PLOTTING --------------------
+
 def plot_results(data, ticker):
     plt.figure(figsize=(12, 6))
     plt.plot(data["Close"], label="Price")
@@ -112,7 +110,6 @@ def plot_results(data, ticker):
     plt.show()
 
 
-# -------------------- SINGLE STOCK RUN --------------------
 def run_single_stock(ticker):
     data = load_data(ticker, "2024-01-01", "2026-02-16")
     data = add_indicators(data)
@@ -131,7 +128,7 @@ def run_single_stock(ticker):
     return data
 
 
-# -------------------- MULTI STOCK PORTFOLIO --------------------
+
 def run_multiple_stocks(tickers):
     portfolio_results = []
 
@@ -149,13 +146,12 @@ def run_multiple_stocks(tickers):
     return pd.DataFrame(portfolio_results)
 
 
-# -------------------- MAIN EXECUTION --------------------
+
 if __name__ == "__main__":
 
-    # Single stock analysis
+  
     run_single_stock("ADANIPOWER.NS")
 
-    # Portfolio analysis
     tickers = ["INFY.NS", "RELIANCE.NS", "TCS.NS","ACC.NS","ATGL.NS","BANKBARODA.NS","CESC.NS","CONCOR.NS"]
     portfolio_df = run_multiple_stocks(tickers)
 
@@ -164,7 +160,7 @@ if __name__ == "__main__":
 
     portfolio_df.to_csv("portfolio_performance.csv")
 
-    # Optimization
+   
     base_data = load_data("ADANIPOWER.NS", "2024-01-01", "2026-02-16")
     optimization_results = optimize_strategy(base_data)
 
@@ -172,3 +168,4 @@ if __name__ == "__main__":
     print(optimization_results)
 
     optimization_results.to_csv("optimization_results.csv")
+
