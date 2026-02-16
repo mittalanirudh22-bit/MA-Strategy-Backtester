@@ -1,26 +1,82 @@
-# MA-Strategy-Backtester
-Moving average crossover backtest on NSE stock using Python
+MA-Strategy-Backtester
 
-## Objective
-Test a simple MA crossover trading strategy using Python.
+Moving Average Crossover Backtesting System for NSE stocks using Python.
+This project tests, evaluates, and optimizes a trend-following strategy using historical market data.
 
-## Data
-Stock: INFY (NSE)
-Source: yfinance
-Period: 2024–2026
+Objective
 
-## Strategy Logic
-- Buy when MA20 > MA50
-- Sell when MA20 < MA50
+Implement a moving average crossover trading strategy
 
-## Metrics
-Sharpe Ratio: 0.79  
-Max Drawdown: -16.8%  
-Strategy Return: 34%  
-Market Return: 10%  
+Backtest performance on NSE stocks
 
-## Result
-Strategy outperformed buy-and-hold with moderate risk.
+Evaluate risk metrics (Sharpe, drawdown, returns)
 
-## Tools Used
-Python, pandas, numpy, matplotlib, yfinance
+Compare with buy-and-hold
+
+Run portfolio-level analysis
+
+Optimize MA parameter combinations
+
+Features
+
+Historical data download using Yahoo Finance
+
+Short & long moving averages
+
+Trading signal generation
+
+Strategy backtesting with transaction costs
+
+Performance metrics calculation:
+
+Sharpe Ratio
+
+Max Drawdown
+
+Total Returns
+
+Market Returns
+
+Portfolio backtesting (multiple stocks)
+
+Parameter optimization (MA combinations)
+
+Visualization of:
+
+Price + MAs
+
+Strategy vs Market equity curve
+
+CSV export for analysis
+
+Tech Stack
+
+Python
+
+pandas
+
+numpy
+
+matplotlib
+
+yfinance
+
+Strategy Logic
+
+Calculate short and long moving averages
+
+Generate signals:
+
+Buy → Short MA > Long MA
+
+Sell → Short MA < Long MA
+
+Apply transaction cost on signal change
+
+Compute:
+
+Strategy returns
+
+Market returns
+
+Evaluate performance metrics
