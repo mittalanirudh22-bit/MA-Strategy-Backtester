@@ -35,7 +35,17 @@ This project tests, evaluates, and optimizes a trend-following strategy using hi
 - Visualization of:
   - Price + MAs
   - Strategy vs Market equity curve  
-- CSV export for analysis  
+- CSV export for analysis
+- ## Features
+
+- 📈 Interactive Streamlit dashboard
+- 📊 Moving average crossover strategy
+- ⚙️ Adjustable MA parameters
+- 📉 Risk metrics: Sharpe ratio, drawdown, returns
+- 🧠 Strategy vs buy-and-hold comparison
+- 🔍 Portfolio and optimization support
+- 🌐 Live deployed web application
+
 
 ---
 
