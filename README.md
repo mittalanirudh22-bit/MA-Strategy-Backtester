@@ -1,3 +1,6 @@
+🚀 Live App:
+https://ma-strategy-backtester-j7qmj33hfprtrbvftgm988.streamlit.app/
+
 # MA-Strategy-Backtester
 
 Moving Average Crossover Backtesting System for NSE stocks using Python.  
