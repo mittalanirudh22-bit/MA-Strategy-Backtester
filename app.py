@@ -8,13 +8,13 @@ st.set_page_config(page_title="Quant Backtesting Dashboard", layout="wide")
 
 st.title("📈 Algorithmic Trading Backtesting Dashboard")
 
-# -------------------- DATA LOADING --------------------
+
 def load_data(ticker, start, end):
     data = yf.download(ticker, start=start, end=end)
     data.dropna(inplace=True)
     return data
 
-# -------------------- INDICATORS --------------------
+
 def add_indicators(data, short_window=20, long_window=50):
     data["Returns"] = data["Close"].pct_change()
     data["MA_short"] = data["Close"].rolling(short_window).mean()
@@ -22,14 +22,14 @@ def add_indicators(data, short_window=20, long_window=50):
     data.dropna(inplace=True)
     return data
 
-# -------------------- SIGNAL GENERATION --------------------
+
 def generate_signals(data):
     data["Signal"] = 0
     data.loc[data["MA_short"] > data["MA_long"], "Signal"] = 1
     data.loc[data["MA_short"] < data["MA_long"], "Signal"] = -1
     return data
 
-# -------------------- BACKTEST --------------------
+
 def backtest_strategy(data):
     data["Strategy Returns"] = data["Signal"].shift(1) * data["Returns"]
     data.dropna(inplace=True)
@@ -39,7 +39,7 @@ def backtest_strategy(data):
 
     return data
 
-# -------------------- PERFORMANCE METRICS --------------------
+
 def performance_metrics(data):
     std = data["Strategy Returns"].std()
 
@@ -59,7 +59,7 @@ def performance_metrics(data):
         "Market Returns": data["Cumulative Market"].iloc[-1] - 1
     }
 
-# -------------------- UI --------------------
+
 st.subheader("Select Stock")
 
 option = st.radio("Choose input method:", ["Dropdown", "Custom ticker"])
@@ -84,7 +84,7 @@ if st.button("Run Backtest"):
 
     metrics = performance_metrics(data)
 
-    # -------------------- METRICS DISPLAY --------------------
+
     st.subheader("📊 Performance Metrics")
 
     col1, col2, col3, col4 = st.columns(4)
@@ -93,7 +93,7 @@ if st.button("Run Backtest"):
     col3.metric("Strategy Returns", f"{metrics['Total Returns']:.2%}")
     col4.metric("Market Returns", f"{metrics['Market Returns']:.2%}")
 
-    # -------------------- PRICE CHART --------------------
+  
     st.subheader("Price & Moving Averages")
 
     fig, ax = plt.subplots(figsize=(12,6))
@@ -103,7 +103,7 @@ if st.button("Run Backtest"):
     ax.legend()
     st.pyplot(fig)
 
-    # -------------------- STRATEGY VS MARKET --------------------
+  
     st.subheader("Strategy vs Market Performance")
 
     fig2, ax2 = plt.subplots(figsize=(12,6))
@@ -111,3 +111,4 @@ if st.button("Run Backtest"):
     ax2.plot(data["Cumulative Market"], label="Market")
     ax2.legend()
     st.pyplot(fig2)
+
